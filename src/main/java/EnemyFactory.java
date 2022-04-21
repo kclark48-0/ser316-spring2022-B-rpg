@@ -12,18 +12,18 @@ public class EnemyFactory {
         dungeon = Dungeon.getInstance();
     }
 
-    public Combatant createEnemy(String type){
-        double scaling = 1;
-        switch (type) {
-            case "mob":
-                break;
-            case "miniboss":
-                scaling = 1.5;
-                break;
-            case "boss":
-                scaling = 2;
-                break;
+    public Combatant createEnemy(){
+        double scaling = 0;
+        int dungeonFloor = dungeon.currentFloor;
+
+        if (dungeonFloor % 10 == 0){
+            scaling = 2;
+        }else if (dungeonFloor % 5 == 0){
+            scaling = 1.5;
+        }else{
+            scaling = 1;
         }
+
         String name = "default";
         int level = (int) (dungeon.currentFloor/levelScaling);
         int maxHealth = (int) (baseHealth * level * scaling);
