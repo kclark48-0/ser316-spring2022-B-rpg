@@ -36,4 +36,17 @@ public class Enemy extends Entity implements Combatant {
             return true;
         }
     }
+
+    @Override
+    public void attack(Entity target){
+        Random rand = new Random();
+        if (1 + rand.nextInt(10) > 3 + target.speed){
+            int damage = 1 + rand.nextInt(2) + this.attack;
+            if (damage - target.defense <= 0){
+                target.health -= 1;
+            }else{
+                target.health -= damage;
+            }
+        }
+    }
 }
