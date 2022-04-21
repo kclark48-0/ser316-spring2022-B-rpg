@@ -7,7 +7,7 @@ public class Enemy extends Entity implements Combatant {
         this.name = "defaultEnemy";
         this.level = 1;
         this.health = 5;
-        this.mana = 5;
+        this.mana = 2;
         this.attack = 1;
         this.defense = 1;
         this.speed = 1;
