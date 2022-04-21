@@ -1,3 +1,5 @@
+package main.java;
+
 public abstract class CombatantModifier implements Combatant{
     private Combatant modifiedCombatant;
 

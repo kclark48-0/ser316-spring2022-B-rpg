@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,5 +43,17 @@ public class Enemy extends Entity implements Combatant {
             consumables.get(rand.nextInt(consumables.size())).use();
             return true;
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Name: " + this.name + "\n" +
+                "Level: " + this.level + "\n" +
+                "Max Health: " + this.maxHealth + "\n" +
+                "Max Mana: " + this.maxMana + "\n" +
+                "Attack: " + this.attack + "\n" +
+                "Defense: " + this.defense + "\n" +
+                "Speed: " + this.speed + "\n" +
+                "Reflex: " + this.reflex + "\n";
     }
 }

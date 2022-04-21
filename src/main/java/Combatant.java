@@ -1,3 +1,5 @@
+package main.java;
+
 /**
  * Common interface for any "living" entities, both player characters and enemies.
  */
