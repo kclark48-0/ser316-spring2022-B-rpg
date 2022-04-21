@@ -11,10 +11,11 @@ public class Enemy extends Entity implements Combatant {
         this.attack = 1;
         this.defense = 1;
         this.speed = 1;
+        this.reflex = 1;
         this.consumables = new ArrayList<>();
     }
 
-    public Enemy(String name, int level, int health, int mana, int attack, int defense, int speed) {
+    public Enemy(String name, int level, int health, int mana, int attack, int defense, int speed, int reflex) {
         this.name = name;
         this.level = level;
         this.health = health;
@@ -22,6 +23,7 @@ public class Enemy extends Entity implements Combatant {
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
+        this.reflex = reflex;
         this.consumables = new ArrayList<>();
     }
 
@@ -34,19 +36,6 @@ public class Enemy extends Entity implements Combatant {
             Random rand = new Random();
             consumables.get(rand.nextInt(consumables.size())).use();
             return true;
-        }
-    }
-
-    @Override
-    public void attack(Entity target){
-        Random rand = new Random();
-        if (1 + rand.nextInt(10) > 3 + target.speed){
-            int damage = 1 + rand.nextInt(2) + this.attack;
-            if (damage - target.defense <= 0){
-                target.health -= 1;
-            }else{
-                target.health -= damage;
-            }
         }
     }
 }
