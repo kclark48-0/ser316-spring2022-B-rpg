@@ -6,7 +6,9 @@ public class Enemy extends Entity implements Combatant {
     public Enemy() {
         this.name = "defaultEnemy";
         this.level = 1;
+        this.maxHealth = 5;
         this.health = 5;
+        this.maxMana = 2;
         this.mana = 2;
         this.attack = 1;
         this.defense = 1;
@@ -15,11 +17,13 @@ public class Enemy extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    public Enemy(String name, int level, int health, int mana, int attack, int defense, int speed, int reflex) {
+    public Enemy(String name, int level, int maxHealth, int maxMana, int attack, int defense, int speed, int reflex) {
         this.name = name;
         this.level = level;
-        this.health = health;
-        this.mana = mana;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.maxMana = maxMana;
+        this.mana = maxMana;
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;

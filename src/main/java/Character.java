@@ -14,7 +14,9 @@ public class Character extends Entity implements Combatant {
         this.xp = 0;
         this.name = "defaultChar";
         this.level = 1;
+        this.maxHealth = 10;
         this.health = 10;
+        this.maxMana = 10;
         this.mana = 5;
         this.attack = 2;
         this.defense = 2;
@@ -23,12 +25,14 @@ public class Character extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    public Character(String name, int level, int health, int mana, int attack, int defense, int speed, int xp, int reflex) {
+    public Character(String name, int level, int maxHealth, int maxMana, int attack, int defense, int speed, int xp, int reflex) {
         this.xp = xp;
         this.name = name;
         this.level = level;
-        this.health = health;
-        this.mana = mana;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.maxMana = maxMana;
+        this.mana = maxMana;
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
