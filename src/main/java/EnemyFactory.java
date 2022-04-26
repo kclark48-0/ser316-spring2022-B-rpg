@@ -4,9 +4,11 @@ import java.util.Random;
 
 public class EnemyFactory {
     Dungeon dungeon;
+    public final int baseXP = 5;
+    public final int baseGold = 1;
     public final double baseHealth = 5;
     public final double baseMana = 2;
-    public final double baseAttack = 1;
+    public final double baseAttack = 2;
     public final double baseDefense = 1;
     public final double baseSpeed = 1;
     public final double baseReflex = 1;
@@ -34,6 +36,8 @@ public class EnemyFactory {
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
         double scaling = dungeon.getScaling();
+        double experience = baseXP * level * scaling;
+        double gold = baseGold * level * scaling;
         double maxHealth = baseHealth * level * scaling;
         double maxMana = baseMana * level * scaling;
         double attack = baseAttack * level * scaling;
@@ -41,6 +45,8 @@ public class EnemyFactory {
         double speed = baseSpeed * level * scaling;
         double reflex = baseReflex * level * scaling;
 
+        int xp;
+        int g;
         int mHlth;
         int mMana;
         int atk;
@@ -65,18 +71,26 @@ public class EnemyFactory {
                 name += "Wraith";
                 maxHealth *= 0.5;
                 defense *= 0.5;
-                speed *= 2;
-                reflex *= 1.5;
+                speed *= 1.5;
+                reflex *= 1.25;
                 break;
         }
 
+        xp = (int) experience;
+        g = (int) gold;
         mHlth = (int) maxHealth;
+        if (mHlth <= 0){
+            mHlth = 1;
+        }
         mMana = (int) maxMana;
+        if (mMana <= 0){
+            mMana = 1;
+        }
         atk = (int) attack;
         def = (int) defense;
         spd = (int) speed;
         ref = (int) reflex;
 
-        return new Enemy(name, level, mHlth, mMana, atk, def, spd, ref);
+        return new Enemy(name, level, xp, g, mHlth, mMana, atk, def, spd, ref);
     }
 }

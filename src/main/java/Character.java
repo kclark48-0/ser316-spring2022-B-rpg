@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Character extends Entity implements Combatant {
 
-    private int xp;
     private String path;
     private String race;
     private Equipment armor;
@@ -14,6 +13,7 @@ public class Character extends Entity implements Combatant {
 
     public Character() {
         this.xp = 0;
+        this.gold = 0;
         this.name = "defaultChar";
         this.level = 1;
         this.maxHealth = 10;
@@ -27,14 +27,15 @@ public class Character extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    public Character(String name, int level, int maxHealth, int maxMana, int attack, int defense, int speed, int xp, int reflex) {
+    public Character(String name, int level, int maxHealth, int maxMana, int attack, int defense, int speed, int xp, int gold, int reflex) {
         this.xp = xp;
+        this.gold = gold;
         this.name = name;
         this.level = level;
         this.maxHealth = maxHealth;
-        this.health = maxHealth;
+        this.health = Integer.valueOf(this.maxHealth);
         this.maxMana = maxMana;
-        this.mana = maxMana;
+        this.mana = Integer.valueOf(this.maxMana);
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
@@ -55,12 +56,15 @@ public class Character extends Entity implements Combatant {
     }
 
     public void levelUp(){
-        this.level += 1;
-        this.maxHealth += 2;
-        this.maxMana += 1;
-        this.attack += 1;
-        this.defense += 1;
-        if (this.level % 3 == 0){
+        while (this.xp >= (5 * this.level)) {
+            this.xp -= (5 * this.level);
+            this.level += 1;
+            this.maxHealth += 5;
+            this.health = Integer.valueOf(this.maxHealth);
+            this.maxMana += 2;
+            this.mana = Integer.valueOf(this.maxMana);
+            this.attack += 2;
+            this.defense += 2;
             this.speed += 1;
             this.reflex += 1;
         }

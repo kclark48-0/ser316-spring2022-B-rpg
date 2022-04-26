@@ -5,10 +5,38 @@ public class Main {
 
         System.out.println("Hello Dungeon!");
         Dungeon dungeon = Dungeon.getInstance();
-        System.out.println("Current dungeon floor: " + dungeon.getCurrentFloor());
         EnemyFactory spawner = new EnemyFactory();
         Character pc = new Character();
-        boolean victory = combat(pc, spawner);
+        boolean victory = true;
+        int tries = 1;
+
+        while (dungeon.getCurrentFloor() < 100){
+            System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
+            victory = combat(pc, spawner);
+            if (victory){
+                dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
+                dungeon.setCurrentFloor(dungeon.getCurrentFloor()+1);
+                if (pc.health <= (int)(0.3 * pc.maxHealth)){
+                    pc.health = Integer.valueOf(pc.maxHealth);
+                    pc.levelUp();
+                }
+            }else{
+                System.out.println("\nPlayer lost at " + pc.health + " health.");
+                pc.health = Integer.valueOf(pc.maxHealth);
+                pc.levelUp();
+                tries++;
+            }
+
+        }
+        pc.health = Integer.valueOf(pc.maxHealth);
+        pc.levelUp();
+        System.out.println("\nReached Floor 99 in " + tries + " tries.");
+        victory = combat(pc, spawner);
+        if (victory){
+            System.out.println("\nYou Win!!!");
+        }else{
+            System.out.println("\nYou Lose!!!");
+        }
         /*
         Enemy baseGobbo = (Enemy) spawner.createEnemy();
         System.out.println(baseGobbo.toString());
@@ -45,33 +73,41 @@ public class Main {
 
     public static boolean combat(Character player, EnemyFactory spawner){
         Enemy opponent = (Enemy) spawner.createEnemy();
+        System.out.println(player);
+        System.out.println(opponent);
         boolean over = false;
         boolean win = false;
         while (!over){
+            System.out.println(opponent.name + " health: " + opponent.health);
+            System.out.println("Player health: " + player.health);
             if (player.speed >= opponent.speed){
                 player.attack(opponent);
-                System.out.println(opponent.name + " health: " + opponent.health);
+                //System.out.println(opponent.name + " health: " + opponent.health);
                 if (opponent.health <= 0){
+                    player.xp += Integer.valueOf(opponent.xp);
+                    player.gold += Integer.valueOf(opponent.gold);
                     win = true;
                     over = true;
                     break;
                 }
                 opponent.attack(player);
-                System.out.println(player.name + " health: " + player.health);
+                //System.out.println(player.name + " health: " + player.health);
                 if(player.health <= 0){
                     over = true;
                     break;
                 }
             }else{
                 opponent.attack(player);
-                System.out.println(opponent.name + " health: " + opponent.health);
+                //System.out.println(opponent.name + " health: " + opponent.health);
                 if(player.health <= 0){
                     over = true;
                     break;
                 }
                 player.attack(opponent);
-                System.out.println(player.name + " health: " + player.health);
+                //System.out.println(player.name + " health: " + player.health);
                 if (opponent.health <= 0){
+                    player.xp += player.xp += Integer.valueOf(opponent.xp);
+                    player.gold += Integer.valueOf(opponent.gold);
                     win = true;
                     over = true;
                     break;
