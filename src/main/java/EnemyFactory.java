@@ -17,14 +17,15 @@ public class EnemyFactory {
     public Combatant createEnemy(){
         String name = "default";
         int level = 1;
-        level += dungeon.currentFloor / levelScaling;
+        level += dungeon.getCurrentFloor() / levelScaling;
+        double scaling = dungeon.getScaling();
         int maxHealth = (int) (baseHealth * level * scaling);
         int maxMana = (int) (baseMana * level * scaling);
         int attack = (int) (baseAttack * level * scaling);
         int defense = (int) (baseDefense * level * scaling);
         int speed = (int) (baseSpeed * level * scaling);
         int reflex = (int) (baseReflex * level * scaling);
-        int lvl = (int) level;
+        int lvl = level;
         return new Enemy(name, lvl, maxHealth, maxMana, attack, defense, speed, reflex);
     }
 }

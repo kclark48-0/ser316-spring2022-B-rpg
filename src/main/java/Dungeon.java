@@ -2,10 +2,10 @@ package main.java;
 
 public class Dungeon {
     private static final Dungeon instance = new Dungeon();
-    protected int floors;
-    protected int currentFloor;
-    protected int furthestFloorReached;
-    protected double scaling = 1;
+    private int floors;
+    private int currentFloor;
+    private int furthestFloorReached;
+    private double scaling = 1;
 
     private Dungeon(){
         this.floors = 100;
