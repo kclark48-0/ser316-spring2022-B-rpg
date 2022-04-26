@@ -15,19 +15,9 @@ public class EnemyFactory {
     }
 
     public Combatant createEnemy(){
-        double scaling = 1;
-        int dungeonFloor = dungeon.currentFloor;
-
-        //TODO: add case for floor 100 FINAL BOSS
-        if (dungeonFloor % 10 == 0){
-            scaling = 2;
-        }else if (dungeonFloor % 5 == 0){
-            scaling = 1.5;
-        }
-
         String name = "default";
         int level = 1;
-        level += dungeonFloor / levelScaling;
+        level += dungeon.currentFloor / levelScaling;
         int maxHealth = (int) (baseHealth * level * scaling);
         int maxMana = (int) (baseMana * level * scaling);
         int attack = (int) (baseAttack * level * scaling);
