@@ -7,6 +7,9 @@ public class Main {
         Dungeon dungeon = Dungeon.getInstance();
         System.out.println("Current dungeon floor: " + dungeon.getCurrentFloor());
         EnemyFactory spawner = new EnemyFactory();
+        Character pc = new Character();
+        boolean victory = combat(pc, spawner);
+        /*
         Enemy baseGobbo = (Enemy) spawner.createEnemy();
         System.out.println(baseGobbo.toString());
 
@@ -37,5 +40,44 @@ public class Main {
         dungeon.setCurrentFloor(15);
         Enemy gobbo15 = (Enemy) spawner.createEnemy();
         System.out.println(gobbo15.toString());
+        */
+    }
+
+    public static boolean combat(Character player, EnemyFactory spawner){
+        Enemy opponent = (Enemy) spawner.createEnemy();
+        boolean over = false;
+        boolean win = false;
+        while (!over){
+            if (player.speed >= opponent.speed){
+                player.attack(opponent);
+                System.out.println(opponent.name + " health: " + opponent.health);
+                if (opponent.health <= 0){
+                    win = true;
+                    over = true;
+                    break;
+                }
+                opponent.attack(player);
+                System.out.println(player.name + " health: " + player.health);
+                if(player.health <= 0){
+                    over = true;
+                    break;
+                }
+            }else{
+                opponent.attack(player);
+                System.out.println(opponent.name + " health: " + opponent.health);
+                if(player.health <= 0){
+                    over = true;
+                    break;
+                }
+                player.attack(opponent);
+                System.out.println(player.name + " health: " + player.health);
+                if (opponent.health <= 0){
+                    win = true;
+                    over = true;
+                    break;
+                }
+            }
+        }
+        return win;
     }
 }

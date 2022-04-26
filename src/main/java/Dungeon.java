@@ -43,6 +43,8 @@ public class Dungeon {
             scaling = 2;
         }else if (currentFloor % 5 == 0){
             scaling = 1.5;
+        }else{
+            scaling = 1;
         }
     }
 
