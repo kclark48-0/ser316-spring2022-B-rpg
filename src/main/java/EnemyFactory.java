@@ -6,9 +6,9 @@ public class EnemyFactory {
     Dungeon dungeon;
     public final int baseXP = 5;
     public final int baseGold = 1;
-    public final double baseHealth = 5;
+    public final double baseHealth = 8;
     public final double baseMana = 2;
-    public final double baseAttack = 2;
+    public final double baseAttack = 3;
     public final double baseDefense = 1;
     public final double baseSpeed = 1;
     public final double baseReflex = 1;
@@ -59,7 +59,7 @@ public class EnemyFactory {
                 name += "Hellhound";
                 maxHealth *= 1.5;
                 maxMana *= 0.5;
-                attack *= 1.25;
+                attack *= 1.5;
                 defense *= 0.75;
                 break;
             case 1:

@@ -43,8 +43,8 @@ public class Character extends Entity implements Combatant {
     }
 
     public void levelUp(){
-        while (this.getXp() >= (5 * this.level)) {
-            this.setXp(this.getXp() - (5 * this.level));
+        while (this.getXp() >= (10 * this.level)) {
+            this.setXp(this.getXp() - (10 * this.level));
             this.setLevel(this.getLevel() + 1);
             this.setMaxHealth(this.getMaxHealth() + 3);
             this.setHealth(this.getMaxHealth());

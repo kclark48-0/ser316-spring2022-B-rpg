@@ -27,7 +27,13 @@ public class EquipmentFactory {
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
-        double multiplier = level * scaling * baseMultiplier;
+        double multiplier = (level * scaling * baseMultiplier) - 1;
+        if (multiplier > 2){
+            multiplier = 2;
+        }else if (multiplier < 0){
+            multiplier = .04;
+        }
+        System.out.println("\n***Multiplier of new Equipment is " + multiplier + "***\n");
 
         Equipment newEquipment = null;
 

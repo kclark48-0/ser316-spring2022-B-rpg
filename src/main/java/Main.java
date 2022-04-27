@@ -25,7 +25,7 @@ public class Main {
                     pc.levelUp();
                 }
             }else{
-                //System.out.println("\nPlayer lost at " + pc.health + " health.");
+                System.out.println("\nPlayer lost at " + pc.health + " health.");
                 pc.health = Integer.valueOf(pc.maxHealth);
                 pc.levelUp();
                 tries++;
@@ -87,7 +87,7 @@ public class Main {
             //System.out.println("Player health: " + player.getHealth());
             if (player.getSpeed() >= opponent.getSpeed()){
                 player.attack(opponent);
-                //System.out.println(opponent.name + " health: " + opponent.health);
+                System.out.println(opponent.name + " health: " + opponent.health);
                 if (opponent.getHealth() <= 0){
                     player.setXp(player.getXp() + opponent.getXp());
                     player.setGold(player.getGold() + opponent.getGold());
@@ -96,20 +96,20 @@ public class Main {
                     break;
                 }
                 opponent.attack(player);
-                //System.out.println(player.name + " health: " + player.health);
+                System.out.println(player.name + " health: " + player.health);
                 if(player.getHealth() <= 0){
                     over = true;
                     break;
                 }
             }else{
                 opponent.attack(player);
-                //System.out.println(opponent.name + " health: " + opponent.health);
+                System.out.println(opponent.name + " health: " + opponent.health);
                 if(player.getHealth() <= 0){
                     over = true;
                     break;
                 }
                 player.attack(opponent);
-                //System.out.println(player.name + " health: " + player.health);
+                System.out.println(player.name + " health: " + player.health);
                 if (opponent.getHealth() <= 0){
                     player.setXp(player.getXp() + opponent.getXp());
                     player.setGold(player.getGold() + opponent.getGold());
