@@ -3,15 +3,13 @@ public class Glowstone implements Equipment {
     private String name;
     private double multiplier;
     private int boost;
-    private Character player;
 
     public Glowstone(String name, int boost, Character pc){
         this.name = name;
         this.boost = boost;
-        this.player = pc;
     }
 
-    public void equip(){
+    public void equip(Character player){
         if (player.getGlowstone() == null){
             player.setGlowstone(this);
             boost = (int) (multiplier * player.getReflex());
@@ -50,13 +48,5 @@ public class Glowstone implements Equipment {
 
     public void setBoost(int boost) {
         this.boost = boost;
-    }
-
-    public Character getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Character player) {
-        this.player = player;
     }
 }

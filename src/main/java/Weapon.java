@@ -2,15 +2,13 @@ public class Weapon implements Equipment {
     private String name;
     private double multiplier;
     private int boost;
-    private Character player;
 
     public Weapon(String name, int boost, Character pc){
         this.name = name;
         this.boost = boost;
-        this.player = pc;
     }
 
-    public void equip(){
+    public void equip(Character player){
         if (player.getWeapon() == null){
             player.setWeapon(this);
             boost = (int) (multiplier * player.getAttack());
@@ -49,13 +47,5 @@ public class Weapon implements Equipment {
 
     public void setBoost(int boost) {
         this.boost = boost;
-    }
-
-    public Character getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Character player) {
-        this.player = player;
     }
 }

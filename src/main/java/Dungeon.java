@@ -1,5 +1,9 @@
 package main.java;
 
+/**
+ * Singleton class representing the game environment and controls the scaling value used to create enemies and items
+ * of appropriate power for the floor they are found on.
+ */
 public class Dungeon {
     private static final Dungeon instance = new Dungeon();
     private int floors;
