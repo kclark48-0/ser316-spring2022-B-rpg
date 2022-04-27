@@ -3,7 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Entity implements Combatant  {
+public class Entity implements Combatant  {
 
     protected String name;
     protected int xp;
@@ -19,30 +19,147 @@ public abstract class Entity implements Combatant  {
     protected int gold;
     protected ArrayList<Consumable> consumables;
 
-    @Override
     public void attack(Entity target){
         Random rand = new Random();
-        if ((1 + rand.nextInt(10) + (this.speed - target.reflex)) > 3){
-            int damage = 1 + rand.nextInt(2) + this.attack;
-            if (damage - target.defense <= 0){
-                target.health -= 1;
+        int minimum;
+        double dblSpeed = (double) this.getSpeed();
+        double dblReflex = (double) target.getReflex();
+        int ratio = this.getSpeed() / target.getReflex();
+        if (ratio >= 2){
+            minimum = 2;
+        }else if (ratio > 1){
+            minimum = 3;
+        }else if (ratio == 1){
+            minimum = 4;
+        }else if (ratio > 0.5){
+            minimum = 5;
+        }else{
+            minimum = 6;
+        }
+
+        if (1 + rand.nextInt(10) >= minimum){
+            int damage = 1 + rand.nextInt(3) + this.attack;
+            if (damage - target.getDefense() <= 0){
+                target.setHealth(target.getHealth() - 1);
             }else{
-                target.health -= damage;
+                target.setHealth(target.getHealth() - (damage - target.getDefense()));
             }
         }
     }
 
     @Override
     public String toString(){
-        return "Name: " + this.name + "\n" +
-                "Level: " + this.level + "\n" +
-                "XP: " + this.level + "\n" +
-                "Gold: " + this.level + "\n" +
-                "Max Health: " + this.maxHealth + "\n" +
-                "Max Mana: " + this.maxMana + "\n" +
-                "Attack: " + this.attack + "\n" +
-                "Defense: " + this.defense + "\n" +
-                "Speed: " + this.speed + "\n" +
-                "Reflex: " + this.reflex + "\n";
+        return "Name: " + this.getName() + "\n" +
+                "Level: " + this.getLevel() + "\n" +
+                "XP: " + this.getXp() + "\n" +
+                "Gold: " + this.getGold() + "\n" +
+                "Max Health: " + this.getMaxHealth() + "\n" +
+                "Health: " + this.getHealth() + "\n" +
+                "Max Mana: " + this.getMaxMana() + "\n" +
+                "Mana: " + this.getMana() + "\n" +
+                "Attack: " + this.getAttack() + "\n" +
+                "Defense: " + this.getDefense() + "\n" +
+                "Speed: " + this.getSpeed() + "\n" +
+                "Reflex: " + this.getReflex() + "\n";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getReflex() {
+        return reflex;
+    }
+
+    public void setReflex(int reflex) {
+        this.reflex = reflex;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public ArrayList<Consumable> getConsumables() {
+        return consumables;
     }
 }

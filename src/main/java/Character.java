@@ -33,9 +33,9 @@ public class Character extends Entity implements Combatant {
         this.name = name;
         this.level = level;
         this.maxHealth = maxHealth;
-        this.health = Integer.valueOf(this.maxHealth);
+        this.health = this.getMaxHealth();
         this.maxMana = maxMana;
-        this.mana = Integer.valueOf(this.maxMana);
+        this.mana = this.getMaxMana();
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
@@ -56,17 +56,17 @@ public class Character extends Entity implements Combatant {
     }
 
     public void levelUp(){
-        while (this.xp >= (5 * this.level)) {
-            this.xp -= (5 * this.level);
-            this.level += 1;
-            this.maxHealth += 5;
-            this.health = Integer.valueOf(this.maxHealth);
-            this.maxMana += 2;
-            this.mana = Integer.valueOf(this.maxMana);
-            this.attack += 2;
-            this.defense += 2;
-            this.speed += 1;
-            this.reflex += 1;
+        while (this.getXp() >= (5 * this.level)) {
+            this.setXp(this.getXp() - (5 * this.level));
+            this.setLevel(this.getLevel() + 1);
+            this.setMaxHealth(this.getMaxHealth() + 3);
+            this.setHealth(this.getMaxHealth());
+            this.setMaxMana(this.getMaxMana() + 2);
+            this.setMana(this.getMaxMana());
+            this.setAttack(this.getAttack() + 3);
+            this.setDefense(this.getDefense() + 2);
+            this.setSpeed(this.getSpeed() + 1);
+            this.setReflex(this.getReflex() + 1);
         }
     }
 }

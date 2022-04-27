@@ -71,8 +71,8 @@ public class EnemyFactory {
                 name += "Wraith";
                 maxHealth *= 0.5;
                 defense *= 0.5;
-                speed *= 1.5;
-                reflex *= 1.25;
+                speed *= 2;
+                reflex *= 1.5;
                 break;
         }
 

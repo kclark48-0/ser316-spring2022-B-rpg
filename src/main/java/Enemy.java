@@ -11,9 +11,9 @@ public class Enemy extends Entity implements Combatant {
         this.xp = xp;
         this.gold = gold;
         this.maxHealth = maxHealth;
-        this.health = Integer.valueOf(this.maxHealth);
+        this.health = this.getMaxHealth();
         this.maxMana = maxMana;
-        this.mana = Integer.valueOf(this.maxMana);
+        this.mana = this.getMaxMana();
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
