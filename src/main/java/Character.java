@@ -7,9 +7,9 @@ public class Character extends Entity implements Combatant {
 
     private String path;
     private String race;
-    private Equipment armor;
-    private Equipment weapon;
-    private Equipment enchant;
+    private Armor armor;
+    private Weapon weapon;
+    private Glowstone glowStone;
 
     public Character() {
         this.xp = 0;
@@ -43,8 +43,7 @@ public class Character extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    @Override
-    public boolean useItem() {
+    public boolean useConsumable() {
         if (consumables.isEmpty()){
             System.out.println("You're all out of consumables!");
             return false;
@@ -63,10 +62,47 @@ public class Character extends Entity implements Combatant {
             this.setHealth(this.getMaxHealth());
             this.setMaxMana(this.getMaxMana() + 2);
             this.setMana(this.getMaxMana());
+
+            this.setAttack(this.getAttack() - this.getWeapon().getBoost());
             this.setAttack(this.getAttack() + 3);
+            this.getWeapon().setBoost((int)(this.getWeapon().getMultiplier() * this.getAttack()));
+            this.setAttack(this.getAttack() + this.getWeapon().getBoost());
+
+            this.setDefense(this.getDefense() - this.getArmor().getBoost());
             this.setDefense(this.getDefense() + 2);
+            this.getArmor().setBoost((int)(this.getArmor().getMultiplier() * this.getDefense()));
+            this.setDefense(this.getDefense() + this.getArmor().getBoost());
+
             this.setSpeed(this.getSpeed() + 1);
+
+            this.setReflex(this.getReflex() - this.getGlowstone().getBoost());
             this.setReflex(this.getReflex() + 1);
+            this.getGlowstone().setBoost((int)(this.getWeapon().getMultiplier() * this.getReflex()));
+            this.setReflex(this.getReflex() + this.getGlowstone().getBoost());
         }
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Glowstone getGlowstone() {
+        return glowStone;
+    }
+
+    public void setGlowstone(Glowstone glowStone) {
+        this.glowStone = glowStone;
     }
 }

@@ -37,8 +37,11 @@ public class Entity implements Combatant  {
             minimum = 6;
         }
 
-        if (1 + rand.nextInt(10) >= minimum){
+        int accuracy = 1 + rand.nextInt(10);
+
+        if (accuracy >= minimum){
             int damage = 1 + rand.nextInt(3) + this.attack;
+            if (accuracy == 10){ damage *= 2; }
             if (damage - target.getDefense() <= 0){
                 target.setHealth(target.getHealth() - 1);
             }else{

@@ -5,5 +5,5 @@ package main.java;
  */
 public interface Combatant {
     public void attack(Entity target);
-    public boolean useItem();
+    public boolean useConsumable();
 }

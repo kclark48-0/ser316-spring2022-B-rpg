@@ -1,5 +1,5 @@
 package main.java;
 
-public abstract class Equipment implements Item {
-    public void equip(){}
+public interface Equipment {
+    public void equip();
 }

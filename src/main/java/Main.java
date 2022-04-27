@@ -6,41 +6,38 @@ public class Main {
         System.out.println("Hello Dungeon!");
         Dungeon dungeon = Dungeon.getInstance();
         EnemyFactory spawner = new EnemyFactory();
-        for (int i = 0; i < 100; i++){
-            Character pc = new Character();
-            dungeon.setCurrentFloor(1);
-            dungeon.setFurthestFloorReached(1);
-            boolean victory = true;
-            int tries = 1;
+        Character pc = new Character();
+        boolean victory = true;
+        int tries = 1;
 
-            while (dungeon.getCurrentFloor() < 100){
-                //System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
-                victory = combat(pc, spawner);
-                if (victory){
-                    dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
-                    dungeon.setCurrentFloor(dungeon.getCurrentFloor()+1);
-                    if (pc.health < (int)(0.15 * pc.maxHealth)){
-                        pc.health = Integer.valueOf(pc.maxHealth);
-                        pc.levelUp();
-                    }
-                }else{
-                    //System.out.println("\nPlayer lost at " + pc.health + " health.");
-                    pc.health = Integer.valueOf(pc.maxHealth);
-                    pc.levelUp();
-                    tries++;
-                }
-
-            }
-            pc.health = Integer.valueOf(pc.maxHealth);
-            pc.levelUp();
-            System.out.println("\nReached Floor 99 in " + tries + " tries.");
+        while (dungeon.getCurrentFloor() < 100){
+            //System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
             victory = combat(pc, spawner);
             if (victory){
-                System.out.println(pc);
-                System.out.println("\nYou Win!!!");
-            }
-        }
+                dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
+                dungeon.setCurrentFloor(dungeon.getCurrentFloor()+1);
 
+                if (pc.health < (int)(0.15 * pc.maxHealth)){
+                    pc.health = Integer.valueOf(pc.maxHealth);
+                    pc.levelUp();
+                }
+            }else{
+                //System.out.println("\nPlayer lost at " + pc.health + " health.");
+                pc.health = Integer.valueOf(pc.maxHealth);
+                pc.levelUp();
+                tries++;
+            }
+
+        }
+        pc.health = Integer.valueOf(pc.maxHealth);
+        pc.levelUp();
+        System.out.println("\nReached Floor 99 in " + tries + " tries.");
+        victory = combat(pc, spawner);
+        if (victory){
+            System.out.println("\nYou Win!!!");
+        }else{
+            System.out.println("\nYou Lose!!!");
+        }
         /*
         Enemy baseGobbo = (Enemy) spawner.createEnemy();
         System.out.println(baseGobbo.toString());
