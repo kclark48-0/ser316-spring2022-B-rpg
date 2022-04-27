@@ -1,12 +1,15 @@
+package main.java;
+
 public class Armor implements Equipment {
 
     private String name;
     private double multiplier;
     private int boost;
 
-    public Armor(String name, int boost, Character pc){
+    public Armor(String name, double multiplier){
         this.name = name;
-        this.boost = boost;
+        this.multiplier = multiplier;
+        this.boost = 0;
     }
 
     public void equip(Character player){

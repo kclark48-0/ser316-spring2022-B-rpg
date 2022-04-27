@@ -1,3 +1,5 @@
+package main.java;
+
 public class Potion implements Consumable {
 
     private String name;
@@ -8,7 +10,7 @@ public class Potion implements Consumable {
         this.power = power;
     }
 
-    public void consume(Entity target){
+    public void useOn(Entity target){
         if (target.getMaxHealth() - target.getHealth() < power){
             target.setHealth(target.getMaxHealth);
         }else{

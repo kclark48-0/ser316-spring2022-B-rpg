@@ -21,16 +21,4 @@ public class Enemy extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    @Override
-    public boolean useItem() {
-        if (consumables.isEmpty()){
-            System.out.println(name + " is all out of consumables!");
-            return false;
-        }else{
-            Random rand = new Random();
-            consumables.get(rand.nextInt(consumables.size())).use();
-            return true;
-        }
-    }
-
 }

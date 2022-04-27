@@ -50,6 +50,22 @@ public class Entity implements Combatant  {
         }
     }
 
+    public boolean useConsumable(Entity opponent) {
+        if (consumables.isEmpty()){
+            System.out.println(name + " is all out of consumables!");
+            return false;
+        }else{
+            Random rand = new Random();
+            Consumable randomConsumable = consumables.get(rand.nextInt(consumables.size()));
+            if (randomConsumable instanceof Potion){
+                randomConsumable.useOn(this);
+            }else if (randomConsumable instanceof Scroll){
+                randomConsumable.useOn(opponent);
+            }
+            return true;
+        }
+    }
+
     @Override
     public String toString(){
         return "Name: " + this.getName() + "\n" +

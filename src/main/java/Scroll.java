@@ -1,3 +1,5 @@
+package main.java;
+
 public class Scroll implements Consumable{
 
     private String name;
@@ -8,7 +10,7 @@ public class Scroll implements Consumable{
         this.power = power;
     }
 
-    public void consume(Entity target){
+    public void useOn(Entity target){
         target.setHealth(target.getHealth() - power);
     }
 }

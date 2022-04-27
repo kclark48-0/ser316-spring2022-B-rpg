@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Random;
 
 public class EquipmentFactory {
@@ -25,42 +27,25 @@ public class EquipmentFactory {
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
+        double multiplier = level * scaling * baseMultiplier;
 
+        Equipment newEquipment;
 
         switch (equipmentType){
             case 0:
                 name += "Armor";
-                Armor newArmor = new Armor
+                newEquipment = new Armor(name, multiplier);
                 break;
             case 1:
-                name += "Ifrit";
-                maxMana *= 1.5;
-                speed *= 0.75;
+                name += "Weapon";
+                newEquipment = new Weapon(name, multiplier);
                 break;
             case 2:
-                name += "Wraith";
-                maxHealth *= 0.5;
-                defense *= 0.5;
-                speed *= 2;
-                reflex *= 1.5;
+                name += "Glowstone";
+                newEquipment = new Glowstone(name, multiplier);
                 break;
         }
 
-        xp = (int) experience;
-        g = (int) gold;
-        mHlth = (int) maxHealth;
-        if (mHlth <= 0){
-            mHlth = 1;
-        }
-        mMana = (int) maxMana;
-        if (mMana <= 0){
-            mMana = 1;
-        }
-        atk = (int) attack;
-        def = (int) defense;
-        spd = (int) speed;
-        ref = (int) reflex;
-
-        return new Enemy(name, level, xp, g, mHlth, mMana, atk, def, spd, ref);
+        return newEquipment;
     }
 }
