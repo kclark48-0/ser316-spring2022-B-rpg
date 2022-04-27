@@ -1,16 +1,18 @@
+package main.java;
+
 import java.util.Random;
 
 public class ConsumableFactory {
 
     Dungeon dungeon;
     public double basePower = 5;
-    public final int levelScaling = 4;
+    public final int levelScaling = 6;
 
     public ConsumableFactory(){
         dungeon = Dungeon.getInstance();
     }
 
-    public Consumable createEquipment(){
+    public Consumable createConsumable(){
         int consumableType = new Random().nextInt(2);
 
         String name;
@@ -26,9 +28,9 @@ public class ConsumableFactory {
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
-        int power = (int)(level * scaling * basePower);
+        int power = (int)(level * basePower);
 
-        System.out.println("\n***Multiplier of new Equipment is " + multiplier + "***\n");
+        System.out.println("\n***Power of new Consumable is " + power + "***\n");
 
         Consumable newConsumable = null;
 

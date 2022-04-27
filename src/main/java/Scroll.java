@@ -5,7 +5,7 @@ public class Scroll implements Consumable{
     private String name;
     private int power;
 
-    public Scroll(String name, int power, Entity owner){
+    public Scroll(String name, int power){
         this.name = name;
         this.power = power;
     }

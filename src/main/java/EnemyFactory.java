@@ -4,18 +4,20 @@ import java.util.Random;
 
 public class EnemyFactory {
     Dungeon dungeon;
+    ConsumableFactory alchemist;
     public final int baseXP = 5;
     public final int baseGold = 1;
-    public final double baseHealth = 8;
+    public final double baseHealth = 7;
     public final double baseMana = 2;
-    public final double baseAttack = 3;
+    public final double baseAttack = 2;
     public final double baseDefense = 1;
     public final double baseSpeed = 1;
     public final double baseReflex = 1;
     public final int levelScaling = 4;
 
-    public EnemyFactory(){
-        dungeon = Dungeon.getInstance();
+    public EnemyFactory(ConsumableFactory alchemist){
+        this.dungeon = Dungeon.getInstance();
+        this.alchemist = alchemist;
     }
 
     public Combatant createEnemy(){
@@ -91,6 +93,10 @@ public class EnemyFactory {
         spd = (int) speed;
         ref = (int) reflex;
 
-        return new Enemy(name, level, xp, g, mHlth, mMana, atk, def, spd, ref);
+        Enemy newEnemy = new Enemy(name, level, xp, g, mHlth, mMana, atk, def, spd, ref);
+        if (new Random().nextInt(10) > 4){
+            newEnemy.getConsumables().add(alchemist.createConsumable());
+        }
+        return newEnemy;
     }
 }

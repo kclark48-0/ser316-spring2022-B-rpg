@@ -7,7 +7,8 @@ public class Main {
 
         System.out.println("Hello Dungeon!");
         Dungeon dungeon = Dungeon.getInstance();
-        EnemyFactory spawner = new EnemyFactory();
+        ConsumableFactory alchemist = new ConsumableFactory();
+        EnemyFactory spawner = new EnemyFactory(alchemist);
         EquipmentFactory forge = new EquipmentFactory();
         Character pc = new Character();
         boolean victory = true;
@@ -19,13 +20,14 @@ public class Main {
             if (victory){
                 dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
                 dungeon.setCurrentFloor(dungeon.getCurrentFloor()+1);
-                getChest(pc, forge, dungeon);
+                getChest(pc, forge, alchemist, dungeon);
                 if (pc.health < (int)(0.15 * pc.maxHealth)){
                     pc.health = Integer.valueOf(pc.maxHealth);
                     pc.levelUp();
                 }
             }else{
                 System.out.println("\nPlayer lost at " + pc.health + " health.");
+                pc.setGold(pc.getGold() - (int)(pc.getGold() * 0.1));
                 pc.health = Integer.valueOf(pc.maxHealth);
                 pc.levelUp();
                 tries++;
@@ -42,38 +44,6 @@ public class Main {
         }else{
             System.out.println("\nYou Lose!!!");
         }
-        /*
-        Enemy baseGobbo = (Enemy) spawner.createEnemy();
-        System.out.println(baseGobbo.toString());
-
-        dungeon.setCurrentFloor(3);
-        Enemy gobbo3 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo3.toString());
-
-        dungeon.setCurrentFloor(5);
-        Enemy gobbo5 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo5.toString());
-
-        dungeon.setCurrentFloor(6);
-        Enemy gobbo6 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo6.toString());
-
-        dungeon.setCurrentFloor(9);
-        Enemy gobbo9 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo9.toString());
-
-        dungeon.setCurrentFloor(10);
-        Enemy gobbo10 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo10.toString());
-
-        dungeon.setCurrentFloor(12);
-        Enemy gobbo12 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo12.toString());
-
-        dungeon.setCurrentFloor(15);
-        Enemy gobbo15 = (Enemy) spawner.createEnemy();
-        System.out.println(gobbo15.toString());
-        */
     }
 
     public static boolean combat(Character player, EnemyFactory spawner){
@@ -122,13 +92,19 @@ public class Main {
         return win;
     }
 
-    public static void getChest(Character player, EquipmentFactory forge, Dungeon dungeon){
+    public static void getChest(Character player, EquipmentFactory forge, ConsumableFactory alchemist, Dungeon dungeon){
         Random rand = new Random();
         if (rand.nextInt(10) + (dungeon.getScaling() * 2) > 9){ //20% chance of a chest spawning each floor,
             int numItems = (int)(2 * dungeon.getScaling());            //30% chance each miniboss floor,
             for (int i = 0; i < numItems; i++){                        //40% chance each midboss floor
-                Equipment newEquip = forge.createEquipment();
-                newEquip.equip(player);
+                if (rand.nextInt(2) == 0){
+                    Equipment newEquip = forge.createEquipment();
+                    newEquip.equip(player);
+                }else{
+                    Consumable newConsumable = alchemist.createConsumable();
+                    player.getConsumables().add(newConsumable);
+                }
+
             }
             System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
             System.out.println(player);

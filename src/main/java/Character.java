@@ -75,7 +75,7 @@ public class Character extends Entity implements Combatant {
             }else{
                 this.setReflex(this.getReflex() - this.getGlowstone().getBoost());
                 this.setReflex(this.getReflex() + 1);
-                this.getGlowstone().setBoost((int)(this.getWeapon().getMultiplier() * this.getReflex()));
+                this.getGlowstone().setBoost((int)(this.getGlowstone().getMultiplier() * this.getReflex()));
                 this.setReflex(this.getReflex() + this.getGlowstone().getBoost());
             }
         }

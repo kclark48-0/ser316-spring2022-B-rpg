@@ -21,6 +21,13 @@ public class Entity implements Combatant  {
 
     public void attack(Entity target){
         Random rand = new Random();
+
+        if (rand.nextInt(10) > 7){
+            if (useConsumable(target)){
+                return;
+            }
+        }
+
         int minimum;
         double dblSpeed = (double) this.getSpeed();
         double dblReflex = (double) target.getReflex();
@@ -54,15 +61,22 @@ public class Entity implements Combatant  {
         if (consumables.isEmpty()){
             System.out.println(name + " is all out of consumables!");
         }else{
-            Random rand = new Random();
-            Consumable randomConsumable = consumables.get(rand.nextInt(consumables.size()));
+            int idx = new Random().nextInt(consumables.size());
+            Consumable randomConsumable = consumables.get(idx);
             if (randomConsumable.getPower() >= (int)(0.10 * this.getMaxHealth())){
                 if (randomConsumable instanceof Potion){
                     randomConsumable.useOn(this);
+                    System.out.println(name + " used " + randomConsumable.getName() + " and healed for "
+                            + randomConsumable.getPower() + "!");
                 }else if (randomConsumable instanceof Scroll){
                     randomConsumable.useOn(opponent);
+                    System.out.println(name + " blasted " + opponent.getName() + " with " + randomConsumable.getName()
+                            + " for " + randomConsumable.getPower() + "!");
                 }
+                consumables.remove(idx);
                 return true;
+            }else{
+                consumables.remove(idx);
             }
         }
         return false;
