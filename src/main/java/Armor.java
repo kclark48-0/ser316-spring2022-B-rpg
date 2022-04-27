@@ -16,12 +16,18 @@ public class Armor implements Equipment {
         if (player.getArmor() == null){
             player.setArmor(this);
             boost = (int) (multiplier * player.getDefense());
+            if (boost < 1){
+                boost = 1;
+            }
             player.setDefense(player.getDefense() + boost);
         }else{
             if (player.getArmor().getMultiplier() < multiplier){
                 player.setDefense(player.getDefense() - player.getArmor().getBoost());
                 player.setArmor(this);
                 boost = (int) (multiplier * player.getDefense());
+                if (boost < 1){
+                    boost = 1;
+                }
                 player.setDefense(player.getDefense() + boost);
             }else{
                 player.setGold(player.getGold() + ((int)(multiplier * 100)));

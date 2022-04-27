@@ -125,11 +125,13 @@ public class Main {
     public static void getChest(Character player, EquipmentFactory forge, Dungeon dungeon){
         Random rand = new Random();
         if (rand.nextInt(10) + (dungeon.getScaling() * 2) > 9){ //20% chance of a chest spawning each floor,
-            int numItems = (int)(2 * dungeon.getScaling());                 //30% chance each miniboss floor,
-            for (int i = 0; i < numItems; i++){
+            int numItems = (int)(2 * dungeon.getScaling());            //30% chance each miniboss floor,
+            for (int i = 0; i < numItems; i++){                        //40% chance each midboss floor
                 Equipment newEquip = forge.createEquipment();
                 newEquip.equip(player);
             }
+            System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
+            System.out.println(player);
         }
     }
 }

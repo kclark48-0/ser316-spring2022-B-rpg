@@ -16,12 +16,18 @@ public class Glowstone implements Equipment {
         if (player.getGlowstone() == null){
             player.setGlowstone(this);
             boost = (int) (multiplier * player.getReflex());
+            if (boost < 1){
+                boost = 1;
+            }
             player.setReflex(player.getReflex() + boost);
         }else{
             if (player.getGlowstone().getMultiplier() < multiplier){
                 player.setReflex(player.getReflex() - player.getGlowstone().getBoost());
                 player.setGlowstone(this);
                 boost = (int) (multiplier * player.getReflex());
+                if (boost < 1){
+                    boost = 1;
+                }
                 player.setReflex(player.getReflex() + boost);
             }else{
                 player.setGold(player.getGold() + ((int)(multiplier * 100)));

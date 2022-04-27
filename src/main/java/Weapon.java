@@ -15,12 +15,18 @@ public class Weapon implements Equipment {
         if (player.getWeapon() == null){
             player.setWeapon(this);
             boost = (int) (multiplier * player.getAttack());
+            if (boost < 1){
+                boost = 1;
+            }
             player.setAttack(player.getAttack() + boost);
         }else{
             if (player.getWeapon().getMultiplier() < multiplier){
                 player.setAttack(player.getAttack() - player.getWeapon().getBoost());
                 player.setWeapon(this);
                 boost = (int) (multiplier * player.getDefense());
+                if (boost < 1){
+                    boost = 1;
+                }
                 player.setAttack(player.getAttack() + boost);
             }else{
                 player.setGold(player.getGold() + ((int)(multiplier * 100)));
