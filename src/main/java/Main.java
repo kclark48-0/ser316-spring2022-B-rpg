@@ -1,11 +1,14 @@
 package main.java;
 
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello Dungeon!");
         Dungeon dungeon = Dungeon.getInstance();
         EnemyFactory spawner = new EnemyFactory();
+        EquipmentFactory forge = new EquipmentFactory();
         Character pc = new Character();
         boolean victory = true;
         int tries = 1;
@@ -16,7 +19,7 @@ public class Main {
             if (victory){
                 dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
                 dungeon.setCurrentFloor(dungeon.getCurrentFloor()+1);
-
+                getChest(pc, forge, dungeon);
                 if (pc.health < (int)(0.15 * pc.maxHealth)){
                     pc.health = Integer.valueOf(pc.maxHealth);
                     pc.levelUp();
@@ -31,6 +34,7 @@ public class Main {
         }
         pc.health = Integer.valueOf(pc.maxHealth);
         pc.levelUp();
+        System.out.println(pc);
         System.out.println("\nReached Floor 99 in " + tries + " tries.");
         victory = combat(pc, spawner);
         if (victory){
@@ -118,7 +122,14 @@ public class Main {
         return win;
     }
 
-    public static void getChest(Character player){
-
+    public static void getChest(Character player, EquipmentFactory forge, Dungeon dungeon){
+        Random rand = new Random();
+        if (rand.nextInt(10) + (dungeon.getScaling() * 2) > 9){ //20% chance of a chest spawning each floor,
+            int numItems = (int)(2 * dungeon.getScaling());                 //30% chance each miniboss floor,
+            for (int i = 0; i < numItems; i++){
+                Equipment newEquip = forge.createEquipment();
+                newEquip.equip(player);
+            }
+        }
     }
 }

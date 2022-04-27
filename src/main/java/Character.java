@@ -1,7 +1,6 @@
 package main.java;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Character extends Entity implements Combatant {
 
@@ -9,7 +8,7 @@ public class Character extends Entity implements Combatant {
     private String race;
     private Armor armor;
     private Weapon weapon;
-    private Glowstone glowStone;
+    private Glowstone glowstone;
 
     public Character() {
         this.xp = 0;
@@ -82,6 +81,35 @@ public class Character extends Entity implements Combatant {
         }
     }
 
+    public String toString(){
+        String strRepresentation = "Name: " + this.getName() + "\n" +
+                "Level: " + this.getLevel() + "\n" +
+                "XP: " + this.getXp() + "\n" +
+                "Gold: " + this.getGold() + "\n" +
+                "Max Health: " + this.getMaxHealth() + "\n" +
+                "Health: " + this.getHealth() + "\n" +
+                "Max Mana: " + this.getMaxMana() + "\n" +
+                "Mana: " + this.getMana() + "\n" +
+                "Attack: " + this.getAttack() + "\n" +
+                "Defense: " + this.getDefense() + "\n" +
+                "Speed: " + this.getSpeed() + "\n" +
+                "Reflex: " + this.getReflex() + "\n";
+        if (armor != null){
+            strRepresentation += "Armor: " + armor.getName() + " (Mult. = " + armor.getMultiplier() + " Boost = " +
+                    armor.getBoost() + ")\n";
+        }
+        if (weapon != null){
+            strRepresentation += "Weapon: " + weapon.getName() + " (Mult. = " + weapon.getMultiplier() + " Boost = " +
+                    weapon.getBoost() + ")\n";
+        }
+        if (glowstone != null){
+            strRepresentation += "Glowstone: " + glowstone.getName() + " (Mult. = " + glowstone.getMultiplier() + " Boost = " +
+                    glowstone.getBoost() + ")\n";
+        }
+
+        return strRepresentation;
+    }
+
     public Armor getArmor() {
         return armor;
     }
@@ -99,10 +127,10 @@ public class Character extends Entity implements Combatant {
     }
 
     public Glowstone getGlowstone() {
-        return glowStone;
+        return glowstone;
     }
 
     public void setGlowstone(Glowstone glowStone) {
-        this.glowStone = glowStone;
+        this.glowstone = glowStone;
     }
 }
