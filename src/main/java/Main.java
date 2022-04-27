@@ -117,4 +117,8 @@ public class Main {
         }
         return win;
     }
+
+    public static void getChest(Character player){
+
+    }
 }

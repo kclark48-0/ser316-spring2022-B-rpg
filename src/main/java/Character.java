@@ -43,17 +43,6 @@ public class Character extends Entity implements Combatant {
         this.consumables = new ArrayList<>();
     }
 
-    public boolean useConsumable() {
-        if (consumables.isEmpty()){
-            System.out.println("You're all out of consumables!");
-            return false;
-        }else{
-            Random rand = new Random();
-            consumables.get(rand.nextInt(consumables.size())).use();
-            return true;
-        }
-    }
-
     public void levelUp(){
         while (this.getXp() >= (5 * this.level)) {
             this.setXp(this.getXp() - (5 * this.level));
@@ -62,23 +51,34 @@ public class Character extends Entity implements Combatant {
             this.setHealth(this.getMaxHealth());
             this.setMaxMana(this.getMaxMana() + 2);
             this.setMana(this.getMaxMana());
+            if (this.getWeapon() == null){
+                this.setAttack(this.getAttack() + 3);
+            }else{
+                this.setAttack(this.getAttack() - this.getWeapon().getBoost());
+                this.setAttack(this.getAttack() + 3);
+                this.getWeapon().setBoost((int)(this.getWeapon().getMultiplier() * this.getAttack()));
+                this.setAttack(this.getAttack() + this.getWeapon().getBoost());
+            }
 
-            this.setAttack(this.getAttack() - this.getWeapon().getBoost());
-            this.setAttack(this.getAttack() + 3);
-            this.getWeapon().setBoost((int)(this.getWeapon().getMultiplier() * this.getAttack()));
-            this.setAttack(this.getAttack() + this.getWeapon().getBoost());
-
-            this.setDefense(this.getDefense() - this.getArmor().getBoost());
-            this.setDefense(this.getDefense() + 2);
-            this.getArmor().setBoost((int)(this.getArmor().getMultiplier() * this.getDefense()));
-            this.setDefense(this.getDefense() + this.getArmor().getBoost());
+            if (this.getArmor() == null){
+                this.setDefense(this.getDefense() + 2);
+            }else{
+                this.setDefense(this.getDefense() - this.getArmor().getBoost());
+                this.setDefense(this.getDefense() + 2);
+                this.getArmor().setBoost((int)(this.getArmor().getMultiplier() * this.getDefense()));
+                this.setDefense(this.getDefense() + this.getArmor().getBoost());
+            }
 
             this.setSpeed(this.getSpeed() + 1);
 
-            this.setReflex(this.getReflex() - this.getGlowstone().getBoost());
-            this.setReflex(this.getReflex() + 1);
-            this.getGlowstone().setBoost((int)(this.getWeapon().getMultiplier() * this.getReflex()));
-            this.setReflex(this.getReflex() + this.getGlowstone().getBoost());
+            if (this.getGlowstone() == null){
+                this.setReflex(this.getReflex() + 1);
+            }else{
+                this.setReflex(this.getReflex() - this.getGlowstone().getBoost());
+                this.setReflex(this.getReflex() + 1);
+                this.getGlowstone().setBoost((int)(this.getWeapon().getMultiplier() * this.getReflex()));
+                this.setReflex(this.getReflex() + this.getGlowstone().getBoost());
+            }
         }
     }
 

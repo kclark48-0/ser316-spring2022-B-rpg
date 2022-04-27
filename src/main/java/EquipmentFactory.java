@@ -29,7 +29,7 @@ public class EquipmentFactory {
         level += dungeon.getCurrentFloor() / levelScaling;
         double multiplier = level * scaling * baseMultiplier;
 
-        Equipment newEquipment;
+        Equipment newEquipment = null;
 
         switch (equipmentType){
             case 0:

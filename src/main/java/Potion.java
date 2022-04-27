@@ -12,7 +12,7 @@ public class Potion implements Consumable {
 
     public void useOn(Entity target){
         if (target.getMaxHealth() - target.getHealth() < power){
-            target.setHealth(target.getMaxHealth);
+            target.setHealth(target.getMaxHealth());
         }else{
             target.setHealth(target.getHealth() + power);
         }
