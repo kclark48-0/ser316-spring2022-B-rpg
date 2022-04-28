@@ -1,5 +1,5 @@
 package main.java;
 
 public interface Equipment {
-    public void equip(Character player);
+    void equip(Character player);
 }

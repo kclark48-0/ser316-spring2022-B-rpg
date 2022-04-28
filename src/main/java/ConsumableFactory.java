@@ -6,35 +6,39 @@ public class ConsumableFactory {
 
     Dungeon dungeon;
     public double basePower = 5;
-    public final int levelScaling = 6;
+    public static final int levelScaling = 6;
 
-    public ConsumableFactory(){
+    public ConsumableFactory() {
         dungeon = Dungeon.getInstance();
     }
 
-    public Consumable createConsumable(){
-        int consumableType = new Random().nextInt(2);
+    /**
+     * Creates a new Consumable of random type (Potion or Scroll) scaled to the current level of
+     * the dungeon.
+     * @return new generated Consumable
+     */
+    public Consumable createConsumable() {
 
         String name;
         double scaling = dungeon.getScaling();
 
-        if (scaling == 2){
+        if (scaling == 2) {
             name = "Eldritch ";
-        }else if (scaling == 1.5){
+        } else if (scaling == 1.5) {
             name = "Arcane ";
-        }else{
+        } else {
             name = "";
         }
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
-        int power = (int)(level * basePower);
+        int power = (int) (level * basePower);
 
-        System.out.println("\n***Power of new Consumable is " + power + "***\n");
+        //System.out.println("\n***Power of new Consumable is " + power + "***\n");
 
         Consumable newConsumable = null;
 
-        switch (consumableType){
+        switch (new Random().nextInt(2)) {
             case 0:
                 name += "Potion";
                 newConsumable = new Potion(name, power);

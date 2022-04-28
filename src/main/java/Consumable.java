@@ -1,7 +1,9 @@
 package main.java;
 
-public interface Consumable{
-    public String getName();
-    public int getPower();
-    public void useOn(Entity target);
+public interface Consumable {
+    String getName();
+
+    int getPower();
+
+    void useOn(Entity target);
 }

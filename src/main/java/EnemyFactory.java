@@ -5,40 +5,45 @@ import java.util.Random;
 public class EnemyFactory {
     Dungeon dungeon;
     ConsumableFactory alchemist;
-    public final int baseXP = 5;
-    public final int baseGold = 1;
-    public final double baseHealth = 7;
-    public final double baseMana = 2;
-    public final double baseAttack = 2;
-    public final double baseDefense = 1;
-    public final double baseSpeed = 1;
-    public final double baseReflex = 1;
-    public final int levelScaling = 4;
+    public static final int baseXp = 5;
+    public static final int baseGold = 1;
+    public static final double baseHealth = 7;
+    public static final double baseMana = 2;
+    public static final double baseAttack = 2;
+    public static final double baseDefense = 1;
+    public static final double baseSpeed = 1;
+    public static final double baseReflex = 1;
+    public static final int levelScaling = 4;
 
-    public EnemyFactory(ConsumableFactory alchemist){
+    public EnemyFactory(ConsumableFactory alchemist) {
         this.dungeon = Dungeon.getInstance();
         this.alchemist = alchemist;
     }
 
-    public Combatant createEnemy(){
+    /**
+     * Creates a new Enemy of random type (Hellhound, Ifrit, or Wraith) scaled to the current level
+     * of the dungeon.
+     * @return new generated Enemy
+     */
+    public Combatant createEnemy() {
         int enemyType = new Random().nextInt(3);
 
         String name;
 
-        if (dungeon.getScaling() == 3){
+        if (dungeon.getScaling() == 3) {
             name = "Archfiend ";
-        }else if (dungeon.getScaling() == 2){
+        } else if (dungeon.getScaling() == 2) {
             name = "Elder ";
-        }else if (dungeon.getScaling() == 1.5){
+        } else if (dungeon.getScaling() == 1.5) {
             name = "Greater ";
-        }else{
+        } else {
             name = "Lesser ";
         }
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
         double scaling = dungeon.getScaling();
-        double experience = baseXP * level * scaling;
+        double experience = baseXp * level * scaling;
         double gold = baseGold * level * scaling;
         double maxHealth = baseHealth * level * scaling;
         double maxMana = baseMana * level * scaling;
@@ -47,16 +52,7 @@ public class EnemyFactory {
         double speed = baseSpeed * level * scaling;
         double reflex = baseReflex * level * scaling;
 
-        int xp;
-        int g;
-        int mHlth;
-        int mMana;
-        int atk;
-        int def;
-        int spd;
-        int ref;
-
-        switch (enemyType){
+        switch (enemyType) {
             case 0:
                 name += "Hellhound";
                 maxHealth *= 1.5;
@@ -78,23 +74,24 @@ public class EnemyFactory {
                 break;
         }
 
-        xp = (int) experience;
-        g = (int) gold;
-        mHlth = (int) maxHealth;
-        if (mHlth <= 0){
-            mHlth = 1;
+        int xp = (int) experience;
+        int g = (int) gold;
+        int mxHlth = (int) maxHealth;
+        if (mxHlth <= 0) {
+            mxHlth = 1;
         }
-        mMana = (int) maxMana;
-        if (mMana <= 0){
-            mMana = 1;
+        int mxMana = (int) maxMana;
+        if (mxMana <= 0) {
+            mxMana = 1;
         }
-        atk = (int) attack;
-        def = (int) defense;
-        spd = (int) speed;
-        ref = (int) reflex;
+        int atk = (int) attack;
+        int def = (int) defense;
+        int spd = (int) speed;
+        int ref = (int) reflex;
 
-        Enemy newEnemy = new Enemy(name, level, xp, g, mHlth, mMana, atk, def, spd, ref);
-        if (new Random().nextInt(10) > 4){
+        Enemy newEnemy = new Enemy(name, level, xp, g, mxHlth, mxMana, atk, def, spd, ref);
+        //there's a 50% chance the new Enemy is generated with a Consumable to use.
+        if (new Random().nextInt(10) > 4) {
             newEnemy.getConsumables().add(alchemist.createConsumable());
         }
         return newEnemy;

@@ -4,40 +4,44 @@ import java.util.Random;
 
 public class EquipmentFactory {
     Dungeon dungeon;
-    public double baseMultiplier = .04;
-    public final int levelScaling = 4;
+    public static final double baseMultiplier = .04;
+    public static final int levelScaling = 4;
 
-    public EquipmentFactory(){
+    public EquipmentFactory() {
         dungeon = Dungeon.getInstance();
     }
 
-    public Equipment createEquipment(){
-        int equipmentType = new Random().nextInt(3);
+    /**
+     * Creates a new Equipment of random type (Armor, Weapon, or Glowstone) scaled to the current
+     * level of the dungeon.
+     * @return new generated Equipment
+     */
+    public Equipment createEquipment() {
 
         String name;
         double scaling = dungeon.getScaling();
 
-        if (scaling == 2){
+        if (scaling == 2) {
             name = "Masterwork ";
-        }else if (scaling == 1.5){
+        } else if (scaling == 1.5) {
             name = "Fine ";
-        }else{
+        } else {
             name = "";
         }
 
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
         double multiplier = (level * scaling * baseMultiplier) / 2;
-        if (multiplier > 1){
+        if (multiplier > 1) {
             multiplier = 1;
-        }else if (multiplier < 0){
+        } else if (multiplier < 0) {
             multiplier = .04;
         }
         //System.out.println("\n***Multiplier of new Equipment is " + multiplier + "***\n");
 
         Equipment newEquipment = null;
 
-        switch (equipmentType){
+        switch (new Random().nextInt(3)) {
             case 0:
                 name += "Armor";
                 newEquipment = new Armor(name, multiplier);
