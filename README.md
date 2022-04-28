@@ -2,7 +2,7 @@
 Basic CLI dungeon crawling game demonstrating various design patterns
 
 I went with the intertwined approach in which the various design patterns interact and are all in a single package. I was not
-able to implement the Decorator design pattern as I had intended, so there are only two design patterns used.
+able to implement the Decorator design pattern as I had intended, so there are only two design patterns used. See report.pdf for screenshots.
 
 # Design Patterns
 ### Singleton: The dungeon itself is implemented as a Singleton since many classes depend on knowing things about it.
