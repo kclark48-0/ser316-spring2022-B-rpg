@@ -8,6 +8,7 @@ import java.util.Random;
  */
 public class Entity implements Combatant {
 
+    /*REQUIREMENT: Character should have stats (mana not currently used)*/
     protected String name;
     protected int xp;
     protected int level;
@@ -34,6 +35,7 @@ public class Entity implements Combatant {
     public void attack(Entity target) {
         Random rand = new Random();
 
+        /*REQUIREMENT: Combatant can either attack or use consumable item*/
         if (rand.nextInt(10) > 7) {
             if (useConsumable(target)) {
                 return;
@@ -58,11 +60,16 @@ public class Entity implements Combatant {
 
         int accuracy = 1 + rand.nextInt(10);
 
+        /*REQUIREMENT: All attacks should have a chance to miss*/
         if (accuracy >= minimum) {
             int damage = 1 + rand.nextInt(3) + this.attack;
+
+            /*REQUIREMENT: Attacks should have a chance to critically strike for double damage*/
             if (accuracy == 10) {
                 damage *= 2;
             }
+
+            /*REQUIREMENT: Attacks should deal a minimum of 1 damage*/
             if (damage - target.getDefense() <= 0) {
                 target.setHealth(target.getHealth() - 1);
             } else {

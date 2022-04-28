@@ -40,6 +40,10 @@ public class Dungeon {
     public void setCurrentFloor(int floor) {
         this.currentFloor = floor;
 
+        /*REQUIREMENT: Encounter small enemy every floor, medium enemy every 5 floors, "boss"
+        * every 10 floors (and the final boss at level 100). scaling is used by EnemyFactory to
+        * determine Enemy stats.
+        */
         if (currentFloor == 100) {
             scaling = 3;
         } else if (currentFloor % 10 == 0) {

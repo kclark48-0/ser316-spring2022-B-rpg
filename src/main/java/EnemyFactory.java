@@ -40,6 +40,7 @@ public class EnemyFactory {
             name = "Lesser ";
         }
 
+        /*REQUIREMENT: Enemies should get harder as you progress*/
         int level = 1;
         level += dungeon.getCurrentFloor() / levelScaling;
         double scaling = dungeon.getScaling();

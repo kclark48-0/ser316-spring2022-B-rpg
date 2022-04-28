@@ -11,6 +11,10 @@ public class Character extends Entity implements Combatant {
     //path(class) and race not yet implemented
     //private String path;
     //private String race;
+
+    /*REQUIREMENT: Character can equip 3 unique item types (equipping logic handled in Armor,
+    * Weapon, and Glowstone classes).
+    */
     private Armor armor;
     private Weapon weapon;
     private Glowstone glowstone;

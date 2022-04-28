@@ -22,13 +22,20 @@ public class Main {
             victory = combat(pc, spawner);
             if (victory) {
                 dungeon.setCurrentFloor(dungeon.getCurrentFloor() + 1);
+
+                /*REQUIREMENT: Small chance of finding chest after each battle*/
                 getChest(pc, forge, alchemist, dungeon);
+
+                /*REQUIREMENT: Player should return to surface to heal and level if under 15% HP*/
                 if (pc.getHealth() < (int) (0.15 * pc.getMaxHealth())) {
                     System.out.println("\nReturned to surface to heal and level.");
                     pc.setHealth(pc.getMaxHealth());
                     pc.levelUp();
                 }
             } else {
+                /*REQUIREMENT: Player should return to surface after losing to heal and level, and
+                * lose some money.
+                */
                 System.out.println("\nPlayer lost at " + pc.health + " health. Returning to surface"
                         + " to heal and level");
                 pc.setGold(pc.getGold() - (int) (pc.getGold() * 0.1));
@@ -65,6 +72,7 @@ public class Main {
         boolean over = false;
         boolean win = false;
         while (!over) {
+            /*REQUIREMENT: Combatant with highest speed goes first (player goes first in ties)*/
             if (player.getSpeed() >= opponent.getSpeed()) {
                 player.attack(opponent);
                 System.out.println("Player attacks! "  + opponent.getName() + " is at "
@@ -122,8 +130,8 @@ public class Main {
                                 ConsumableFactory alchemist, Dungeon dungeon) {
         Random rand = new Random();
         if (rand.nextInt(10) + (dungeon.getScaling() * 2) > 9) {
-            int numItems = (int) (2 * dungeon.getScaling());
-            for (int i = 0; i < numItems; i++) {
+            /*REQUIREMENT: Randomly encountered shop/chest should contain 3 random items*/
+            for (int i = 0; i < 3; i++) {
                 if (rand.nextInt(2) == 0) {
                     Equipment newEquip = forge.createEquipment();
                     newEquip.equip(player);

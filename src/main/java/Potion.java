@@ -15,6 +15,7 @@ public class Potion implements Consumable {
      * @param target the Entity to be healed by the potion.
      */
     public void useOn(Entity target) {
+        /*REQUIREMENT: Potions should never give more health than maximum*/
         if (target.getMaxHealth() - target.getHealth() < power) {
             target.setHealth(target.getMaxHealth());
         } else {
