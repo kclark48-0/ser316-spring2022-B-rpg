@@ -8,13 +8,11 @@ public class Dungeon {
     private static final Dungeon instance = new Dungeon();
     private int floors;
     private int currentFloor;
-    private int furthestFloorReached;
     private double scaling = 1;
 
     private Dungeon() {
         this.floors = 100;
         this.currentFloor = 1;
-        this.furthestFloorReached = 1;
     }
 
     public static synchronized Dungeon getInstance() {
@@ -51,14 +49,6 @@ public class Dungeon {
         } else {
             scaling = 1;
         }
-    }
-
-    public int getFurthestFloorReached() {
-        return furthestFloorReached;
-    }
-
-    public void setFurthestFloorReached(int furthestFloorReached) {
-        this.furthestFloorReached = furthestFloorReached;
     }
 
     public void setScaling(double scaling) {

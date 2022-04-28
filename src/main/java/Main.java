@@ -21,19 +21,18 @@ public class Main {
             System.out.println("\nCurrent dungeon floor: " + dungeon.getCurrentFloor());
             victory = combat(pc, spawner);
             if (victory) {
-                dungeon.setFurthestFloorReached(dungeon.getCurrentFloor());
                 dungeon.setCurrentFloor(dungeon.getCurrentFloor() + 1);
                 getChest(pc, forge, alchemist, dungeon);
-                if (pc.health < (int) (0.15 * pc.maxHealth)) {
+                if (pc.getHealth() < (int) (0.15 * pc.getMaxHealth())) {
                     System.out.println("\nReturned to surface to heal and level.");
-                    pc.health = Integer.valueOf(pc.maxHealth);
+                    pc.setHealth(pc.getMaxHealth());
                     pc.levelUp();
                 }
             } else {
                 System.out.println("\nPlayer lost at " + pc.health + " health. Returning to surface"
                         + " to heal and level");
                 pc.setGold(pc.getGold() - (int) (pc.getGold() * 0.1));
-                pc.health = Integer.valueOf(pc.maxHealth);
+                pc.setHealth(pc.getMaxHealth());
                 pc.levelUp();
                 tries++;
             }
@@ -43,7 +42,7 @@ public class Main {
         pc.levelUp();
         System.out.println("\nCharacter's status going into the Final Boss fight:");
         System.out.println(pc);
-        System.out.println("\nReached Floor 99 in " + tries + " tries.");
+        System.out.println("\nReached Floor 99 in " + tries + " tries.\n");
         victory = combat(pc, spawner);
         if (victory) {
             System.out.println("\nYou've conquered the dungeon!!!");

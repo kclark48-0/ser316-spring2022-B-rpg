@@ -23,16 +23,8 @@ public class Scroll implements Consumable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPower() {
         return power;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
     }
 
 }
